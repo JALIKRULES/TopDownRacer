@@ -102,5 +102,8 @@ public class TopDownCarController : MonoBehaviour
         steeringInput = inputVector.x;
         accelerationInput = inputVector.y;
     }
-
+    public float GetVelocityMagnitude()
+    {
+        return carRigidbody2D.velocity.magnitude;
+    }
 }
