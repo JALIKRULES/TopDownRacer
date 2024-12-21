@@ -6,37 +6,32 @@ public class DrawPathHandler : MonoBehaviour
 {
     public Transform transformRootObject;
 
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
-        if (transformRootObject == null)
-            return;
+        if (transformRootObject == null) return;
 
-        // Get all the waypoints (children of the rootObject)
+        // Получаем все дочерние объекты, которые имеют компонент WaypointNode
         WaypointNode[] waypointNodes = transformRootObject.GetComponentsInChildren<WaypointNode>();
 
-        // Iterate over the waypoint nodes and draw lines between their transforms
-        foreach (var waypointNode in waypointNodes)
+        Gizmos.color = Color.green;  // Цвет линий
+
+        // Проходим по всем WaypointNode
+        foreach (WaypointNode waypointNode in waypointNodes)
         {
-            // Connect the waypoints in the root object (parent to parent)
-            if (waypointNode.transform != transformRootObject)
+            // Если у этого WaypointNode есть следующие узлы (nextWaypointNode)
+            if (waypointNode.nextWaypointNode != null)
             {
-                Gizmos.color = Color.red;  // You can change the color of the line
-                Gizmos.DrawLine(waypointNode.transform.position, waypointNode.transform.position);
+                // Рисуем линии между этим узлом и всеми его следующими узлами
+                foreach (var nextNode in waypointNode.nextWaypointNode)
+                {
+                    // Проверяем, что следующий узел существует
+                    if (nextNode != null)
+                    {
+                        // Рисуем линию от текущего узла к следующему узлу
+                        Gizmos.DrawLine(waypointNode.transform.position, nextNode.transform.position);
+                    }
+                }
             }
-
-            // Iterate over the array of transforms in each waypoint node and connect them
-            for (int i = 0; i < waypointNode.ReturnNextWaypoints().Length - 1; i++)
-            {
-                Gizmos.color = Color.blue;  // Color for connections between array elements
-                Gizmos.DrawLine(waypointNode.GetSpecificWaypointPosition(i), waypointNode.GetSpecificWaypointPosition(i + 1));
-            }
-
-            // Optionally, connect each transform in the waypoint node to each other
-            //foreach (Transform child in waypointNode.GetEachWaypointPosition())
-            //{
-            //    Gizmos.color = Color.green;  // Color for connections to children
-            //    Gizmos.DrawLine(waypointNode.transform.position, child.position);
-            //}
         }
     }
 }

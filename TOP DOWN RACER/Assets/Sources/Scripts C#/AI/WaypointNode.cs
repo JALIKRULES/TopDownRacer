@@ -4,20 +4,11 @@ using UnityEngine;
 
 public class WaypointNode : MonoBehaviour
 {
+    [Header("Speed set once we reach the waypoint")]
+    public float maxSpeed = 0;
+
     [Header("This is the waypoint we are going towards, not yet reached")]
     public float minDistanceToReachWaypoint = 5;
 
     public WaypointNode[] nextWaypointNode;
-
-    public WaypointNode[] ReturnNextWaypoints()
-    {
-        return nextWaypointNode;
-    }
-
-    public Vector2 GetSpecificWaypointPosition(int index)
-    {
-        return nextWaypointNode[index].transform.position;
-    }
-
-
 }
