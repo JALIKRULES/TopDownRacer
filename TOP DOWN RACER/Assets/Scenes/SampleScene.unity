@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23270a9dad67d8d4badd68f040f6b120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 5
   minDistanceToReachWaypoint: 5
   nextWaypointNode:
   - {fileID: 611731261}
@@ -195,7 +196,7 @@ Transform:
   m_GameObject: {fileID: 97534815}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.25, y: -59.25, z: 0}
+  m_LocalPosition: {x: 39.25, y: -59.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -213,9 +214,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23270a9dad67d8d4badd68f040f6b120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 5
   minDistanceToReachWaypoint: 5
   nextWaypointNode:
-  - {fileID: 0}
+  - {fileID: 839528794}
 --- !u!1 &168224792
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23270a9dad67d8d4badd68f040f6b120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 5
   minDistanceToReachWaypoint: 5
   nextWaypointNode:
   - {fileID: 231442502}
@@ -292,6 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23270a9dad67d8d4badd68f040f6b120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 5
   minDistanceToReachWaypoint: 5
   nextWaypointNode:
   - {fileID: 27070924}
@@ -427,6 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23270a9dad67d8d4badd68f040f6b120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 5
   minDistanceToReachWaypoint: 5
   nextWaypointNode:
   - {fileID: 168224793}
@@ -621,6 +626,7 @@ Transform:
   - {fileID: 27070925}
   - {fileID: 611731260}
   - {fileID: 97534816}
+  - {fileID: 839528793}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &611731259
@@ -667,6 +673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23270a9dad67d8d4badd68f040f6b120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 5
   minDistanceToReachWaypoint: 5
   nextWaypointNode:
   - {fileID: 484387325}
@@ -1690,6 +1697,54 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &839528792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 839528793}
+  - component: {fileID: 839528794}
+  m_Layer: 0
+  m_Name: WaypointNode (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &839528793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839528792}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 39.25, y: 22.89, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 558216192}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &839528794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839528792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23270a9dad67d8d4badd68f040f6b120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 5
+  minDistanceToReachWaypoint: 5
+  nextWaypointNode:
+  - {fileID: 168224793}
 --- !u!1 &1179467702
 GameObject:
   m_ObjectHideFlags: 0
@@ -2536,6 +2591,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 441268955257508400, guid: 885f73461e93f634e9c5a1546237d98d, type: 3}
+      propertyPath: aiMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2428929091372246094, guid: 885f73461e93f634e9c5a1546237d98d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
