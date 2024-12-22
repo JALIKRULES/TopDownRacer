@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5503801289717512361}
   - component: {fileID: 9174515801657073633}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3451135461155199377}
   - component: {fileID: 7148969667159245738}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarHitSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 8992114711110446180}
   - component: {fileID: 8620119019344108216}
   - component: {fileID: 736498741867111131}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WheelTrailRenderer FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9120942683801981837}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 4168074694610068694}
   - component: {fileID: 7478975586308894597}
   - component: {fileID: 2872614132487860972}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: _carBase(Player)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 462094259757464762}
   - component: {fileID: 4260236768461718432}
   - component: {fileID: 2312735883918239581}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WheelTrailRenderer FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -665,7 +665,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2454342690643801811}
   - component: {fileID: 8934781323912724793}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -753,7 +753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6709018595414959534}
   - component: {fileID: 8631143423165344588}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarScreechSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -883,7 +883,7 @@ GameObject:
   - component: {fileID: 2262817389542781163}
   - component: {fileID: 5360842539486552382}
   - component: {fileID: 6378283186332599376}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ParticleSystemSmoke FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5735,7 +5735,7 @@ GameObject:
   - component: {fileID: 2194108017337997516}
   - component: {fileID: 915523561195476125}
   - component: {fileID: 1060399734771757074}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ParticleSystemSmoke FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10585,7 +10585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6657499368775183133}
   - component: {fileID: 2601969453346468265}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarEngineSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
