@@ -10,6 +10,14 @@ public class TopDownCarController : MonoBehaviour
     public float turnFactor = 3.5f;
     public float maxSpeed = 20f;
 
+    [Header("Sprites")]
+    public SpriteRenderer carSpriteRenderer;
+    public SpriteRenderer carShadowRenderer;
+
+    [Header("Jumping")]
+    public AnimationCurve jumpCurve;
+
+
     float accelerationInput = 0;
     float steeringInput = 0;
 
@@ -17,11 +25,15 @@ public class TopDownCarController : MonoBehaviour
 
     float velocityVsUp = 0;
 
+    bool isJumping = false;
+
     Rigidbody2D carRigidbody2D;
+    Collider2D carCollider2D;
 
     private void Awake()
     {
         carRigidbody2D = GetComponent<Rigidbody2D>();
+        carCollider2D = GetComponentInChildren<Collider2D>();
     }
 
     private void FixedUpdate()
@@ -105,5 +117,60 @@ public class TopDownCarController : MonoBehaviour
     public float GetVelocityMagnitude()
     {
         return carRigidbody2D.velocity.magnitude;
+    }
+
+    public void Jump(float jumpHeightScale, float jumpPushScale)
+    {
+        if(!isJumping) 
+            StartCoroutine(JumpCO(jumpHeightScale, jumpPushScale));
+    }
+
+    private IEnumerator JumpCO(float jumpHeightScale, float jumpPushScale)
+    {
+        isJumping = true;
+
+        float jumpStartTime = Time.time;
+        float jumpDuration = carRigidbody2D.velocity.magnitude * 0.05f;
+
+        jumpHeightScale = jumpHeightScale * carRigidbody2D.velocity.magnitude * 0.05f;
+        jumpHeightScale = Mathf.Clamp(jumpHeightScale , 0.0f , 1.0f);
+
+
+        carCollider2D.enabled = false;
+
+        while (isJumping)
+        {
+            float jumpCompletedPercentage = (Time.time - jumpStartTime) / jumpDuration;
+            jumpCompletedPercentage = Mathf.Clamp01(jumpCompletedPercentage);
+
+            carSpriteRenderer.transform.localScale = Vector3.one + Vector3.one * jumpCurve.Evaluate(jumpCompletedPercentage) * jumpHeightScale;
+
+            carShadowRenderer.transform.localScale = carSpriteRenderer.transform.localScale * 0.75f;
+
+            carShadowRenderer.transform.localPosition = new Vector3(1 , -1 , 0.0f) * 3 * jumpCurve.Evaluate(jumpCompletedPercentage) * jumpHeightScale;
+
+            if(jumpCompletedPercentage == 1.0f)
+                break;
+
+            yield return null;
+        }
+
+        carSpriteRenderer.transform.localScale = Vector3.one;
+
+        carShadowRenderer.transform.localPosition = Vector3.zero;
+        carShadowRenderer.transform.localScale = Vector3.one;
+
+        carCollider2D.enabled = true;
+
+        isJumping = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider2D)
+    {
+        if (collider2D.CompareTag("Jump"))
+        {
+            JumpData jumpData = collider2D.GetComponent<JumpData>();
+            Jump(jumpData.jumpHeightScale, jumpData.jumpPushScale);
+        }
     }
 }

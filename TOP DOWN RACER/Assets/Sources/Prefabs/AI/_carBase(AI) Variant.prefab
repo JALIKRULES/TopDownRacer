@@ -56,6 +56,98 @@ PrefabInstance:
       propertyPath: m_TagString
       value: AI
       objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: maxSpeed
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: carShadowRenderer
+      value: 
+      objectReference: {fileID: 7151323676233202957}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: carSpriteRenderer
+      value: 
+      objectReference: {fileID: 8666159100471563172}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].time
+      value: 0.39721265
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[2].time
+      value: 0.81059396
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[3].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[2].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].inSlope
+      value: 0.004727696
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].inSlope
+      value: 0.0010635572
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[2].inSlope
+      value: 0.0019026581
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[3].inSlope
+      value: -0.015885085
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].outSlope
+      value: 0.004727696
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].outSlope
+      value: 0.0010635572
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[2].inWeight
+      value: 0.48447704
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[2].outSlope
+      value: 0.0019026581
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[3].inWeight
+      value: 0.15995395
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[3].outSlope
+      value: -0.015885085
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].outWeight
+      value: 0.16549113
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].outWeight
+      value: 0.6585251
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478975586308894597, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[2].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     - target: {fileID: 8934781323912724793, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -86,3 +178,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7653a9ad75944dd4d8f731f972dca4bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aiMode: 0
+  maxSpeed: 16
+  isAvoidingCars: 1
+  skillLevel: 1
+--- !u!212 &7151323676233202957 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6954757878528143248, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+  m_PrefabInstance: {fileID: 268766339529478813}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &8666159100471563172 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8934781323912724793, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+  m_PrefabInstance: {fileID: 268766339529478813}
+  m_PrefabAsset: {fileID: 0}
