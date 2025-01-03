@@ -43,11 +43,17 @@ TagManager:
   - name: Background
     uniqueID: 2875051207
     locked: 0
+  - name: RaceTrack
+    uniqueID: 1203040325
+    locked: 0
   - name: SkidMarks
     uniqueID: 2980502577
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Flying
+    uniqueID: 2072157333
     locked: 0
   - name: Particles
     uniqueID: 2326110859

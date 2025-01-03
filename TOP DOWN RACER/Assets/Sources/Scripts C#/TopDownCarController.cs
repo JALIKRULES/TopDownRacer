@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TopDownCarController : MonoBehaviour
@@ -16,7 +15,7 @@ public class TopDownCarController : MonoBehaviour
 
     [Header("Jumping")]
     public AnimationCurve jumpCurve;
-
+    public ParticleSystem landingParticleSystem;
 
     float accelerationInput = 0;
     float steeringInput = 0;
@@ -29,11 +28,13 @@ public class TopDownCarController : MonoBehaviour
 
     Rigidbody2D carRigidbody2D;
     Collider2D carCollider2D;
+    CarSFXHandler carSFXHandler;
 
     private void Awake()
     {
         carRigidbody2D = GetComponent<Rigidbody2D>();
         carCollider2D = GetComponentInChildren<Collider2D>();
+        carSFXHandler = GetComponent<CarSFXHandler>();
     }
 
     private void FixedUpdate()
@@ -47,21 +48,25 @@ public class TopDownCarController : MonoBehaviour
 
     private void ApplyEngineForce()
     {
-        velocityVsUp = Vector2.Dot(transform.up, carRigidbody2D.velocity);
-
-        if(velocityVsUp >maxSpeed && accelerationInput > 0) 
-            return;
-
-        if (velocityVsUp  < -maxSpeed * 0.5f && accelerationInput < 0)
-            return;
-
-        if(carRigidbody2D.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput >0)
-            return;
+        if (isJumping && accelerationInput < 0)
+            accelerationInput = 0;
 
         if (accelerationInput == 0)
             carRigidbody2D.drag = Mathf.Lerp(carRigidbody2D.drag, 3.0f, Time.deltaTime * 3);
         else
             carRigidbody2D.drag = 0;
+
+
+        velocityVsUp = Vector2.Dot(transform.up, carRigidbody2D.velocity);
+
+        if (velocityVsUp > maxSpeed && accelerationInput > 0)
+            return;
+
+        if (velocityVsUp < -maxSpeed * 0.5f && accelerationInput < 0)
+            return;
+
+        if (carRigidbody2D.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0 && !isJumping)
+            return;
 
         Vector2 engineForceVector = transform.up * accelerationInput * accelerationFactor;
 
@@ -70,7 +75,7 @@ public class TopDownCarController : MonoBehaviour
 
     private void ApplySteering()
     {
-        float minSpeedBeforeAllowTurningFactor = (carRigidbody2D.velocity.magnitude /8);
+        float minSpeedBeforeAllowTurningFactor = (carRigidbody2D.velocity.magnitude / 8);
         minSpeedBeforeAllowTurningFactor = Mathf.Clamp01(minSpeedBeforeAllowTurningFactor);
 
 
@@ -91,18 +96,21 @@ public class TopDownCarController : MonoBehaviour
         return Vector2.Dot(transform.right, carRigidbody2D.velocity);
     }
 
-    public bool IsTireScreeching(out float lateralVelocity , out bool isBraking)
+    public bool IsTireScreeching(out float lateralVelocity, out bool isBraking)
     {
         lateralVelocity = GetLateralVelocity();
         isBraking = false;
 
-        if(accelerationInput <0 && velocityVsUp >0)
+        if(isJumping) 
+            return false;
+
+        if (accelerationInput < 0 && velocityVsUp > 0)
         {
             isBraking = true;
             return true;
         }
 
-        if(Mathf.Abs(GetLateralVelocity()) > 4.0f)
+        if (Mathf.Abs(GetLateralVelocity()) > 4.0f)
             return true;
 
         return false;
@@ -121,7 +129,7 @@ public class TopDownCarController : MonoBehaviour
 
     public void Jump(float jumpHeightScale, float jumpPushScale)
     {
-        if(!isJumping) 
+        if (!isJumping)
             StartCoroutine(JumpCO(jumpHeightScale, jumpPushScale));
     }
 
@@ -133,10 +141,17 @@ public class TopDownCarController : MonoBehaviour
         float jumpDuration = carRigidbody2D.velocity.magnitude * 0.05f;
 
         jumpHeightScale = jumpHeightScale * carRigidbody2D.velocity.magnitude * 0.05f;
-        jumpHeightScale = Mathf.Clamp(jumpHeightScale , 0.0f , 1.0f);
+        jumpHeightScale = Mathf.Clamp(jumpHeightScale, 0.0f, 1.0f);
 
 
         carCollider2D.enabled = false;
+
+        carSFXHandler.PlayJumpSFX();
+
+        carSpriteRenderer.sortingLayerName = "Flying";
+        carShadowRenderer.sortingLayerName = "Flying";
+
+        carRigidbody2D.AddForce(carRigidbody2D.velocity.normalized * jumpPushScale * 10, ForceMode2D.Impulse);
 
         while (isJumping)
         {
@@ -147,22 +162,42 @@ public class TopDownCarController : MonoBehaviour
 
             carShadowRenderer.transform.localScale = carSpriteRenderer.transform.localScale * 0.75f;
 
-            carShadowRenderer.transform.localPosition = new Vector3(1 , -1 , 0.0f) * 3 * jumpCurve.Evaluate(jumpCompletedPercentage) * jumpHeightScale;
+            carShadowRenderer.transform.localPosition = new Vector3(1, -1, 0.0f) * 3 * jumpCurve.Evaluate(jumpCompletedPercentage) * jumpHeightScale;
 
-            if(jumpCompletedPercentage == 1.0f)
+            if (jumpCompletedPercentage == 1.0f)
                 break;
 
             yield return null;
         }
 
-        carSpriteRenderer.transform.localScale = Vector3.one;
+        if (Physics2D.OverlapCircle(transform.position, 1.5f))
+        {
+            
+            isJumping = false;
 
-        carShadowRenderer.transform.localPosition = Vector3.zero;
-        carShadowRenderer.transform.localScale = Vector3.one;
+            Jump(0.2f, 0.6f);
+        }
+        else
+        {
+            carSpriteRenderer.transform.localScale = Vector3.one;
 
-        carCollider2D.enabled = true;
+            carShadowRenderer.transform.localPosition = Vector3.zero;
+            carShadowRenderer.transform.localScale = Vector3.one;
 
-        isJumping = false;
+            carCollider2D.enabled = true;
+
+            carSpriteRenderer.sortingLayerName = "Default";
+            carShadowRenderer.sortingLayerName = "Default";
+
+            if(jumpHeightScale > 0.2f)
+            {
+                landingParticleSystem.Play();
+
+                carSFXHandler.PlayLandingSFX();
+            }
+
+            isJumping = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider2D)
@@ -173,4 +208,10 @@ public class TopDownCarController : MonoBehaviour
             Jump(jumpData.jumpHeightScale, jumpData.jumpPushScale);
         }
     }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireSphere(transform.position, 1.5f);
+    //}
 }

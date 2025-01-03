@@ -1,12 +1,18 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 
 public class CarSFXHandler : MonoBehaviour
 {
+    [Header("Mixers")]
+    public AudioMixer audioMixer;
+
     [Header("Audio sources")]
     public AudioSource tiresScreeachingAudioSource;
     public AudioSource engineAudioSource;
     public AudioSource carHitAudioSource;
+    public AudioSource carJumpAudioSource;
+    public AudioSource carLandingAudioSource;
 
     float desiredEnginePitch = 0.5f;
     float tireScreechPitch = 0.5f;
@@ -55,6 +61,16 @@ public class CarSFXHandler : MonoBehaviour
         }
 
         else tiresScreeachingAudioSource.volume = Mathf.Lerp(tiresScreeachingAudioSource.volume, 0, Time.deltaTime * 10);
+    }
+
+    public void PlayJumpSFX()
+    {
+        carJumpAudioSource.Play();
+    }
+
+    public void PlayLandingSFX()
+    {
+        carLandingAudioSource.Play();
     }
 
     private void OnCollisionEnter2D(Collision2D collision2D)
