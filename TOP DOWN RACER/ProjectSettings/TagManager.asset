@@ -6,6 +6,10 @@ TagManager:
   tags:
   - AI
   - Jump
+  - OverpassTrigger
+  - UnderpassTrigger
+  - OverpassCollider
+  - UnderpassCollider
   layers:
   - Default
   - TransparentFX
@@ -51,6 +55,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: RaceTrackOverpass
+    uniqueID: 3574081199
     locked: 0
   - name: Flying
     uniqueID: 2072157333

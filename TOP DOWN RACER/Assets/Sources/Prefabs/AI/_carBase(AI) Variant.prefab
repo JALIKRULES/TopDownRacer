@@ -159,14 +159,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6034026809975150997, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 441268955257508400}
+      addedObject: {fileID: -8219232302849713990}
   m_SourcePrefab: {fileID: 100100000, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
 --- !u!1 &5766844918315879176 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6034026809975150997, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
   m_PrefabInstance: {fileID: 268766339529478813}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &441268955257508400
+--- !u!114 &-8219232302849713990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7653a9ad75944dd4d8f731f972dca4bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiMode: 0
+  aiMode: 1
   maxSpeed: 16
   isAvoidingCars: 1
   skillLevel: 1

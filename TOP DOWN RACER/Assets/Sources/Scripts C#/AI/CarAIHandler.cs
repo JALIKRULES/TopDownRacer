@@ -16,6 +16,7 @@ public class CarAIHandler : MonoBehaviour
     Vector3 targetPosition = Vector3.zero;
     Transform targetTransform = null;
     float originalMaximumSpeed = 0.0f;
+    
 
     Vector2 avoidanceVectorLerped = Vector2.zero;
 
@@ -225,4 +226,5 @@ public class CarAIHandler : MonoBehaviour
         newVectorToTarget = vectorToTarget;
 
     }
+
 }
