@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CarLayerHandler : MonoBehaviour
 {
+    public SpriteRenderer carOutlineSpriteRenderer; 
+
     List<SpriteRenderer> defaultLayerSpriteRenderers = new List<SpriteRenderer>();
 
     List<Collider2D> overpassColliderList = new List<Collider2D>();
@@ -28,7 +30,7 @@ public class CarLayerHandler : MonoBehaviour
 
         foreach (GameObject underpassColliderGameObject in GameObject.FindGameObjectsWithTag("UnderpassCollider"))
         {
-            overpassColliderList.Add(underpassColliderGameObject.GetComponent<Collider2D>());
+            underpassColliderList.Add(underpassColliderGameObject.GetComponent<Collider2D>());
         }
 
         carCollider = GetComponentInChildren<Collider2D>();
@@ -45,10 +47,13 @@ public class CarLayerHandler : MonoBehaviour
         if (isDrivingOnOverpass)
         {
             SetSortingLayer("RaceTrackOverpass");
+
+            carOutlineSpriteRenderer.enabled = false;
         }
         else
         {
             SetSortingLayer("Default");
+            carOutlineSpriteRenderer.enabled = true;
         }
 
         SetCollisionWithOverpass();
@@ -77,6 +82,11 @@ public class CarLayerHandler : MonoBehaviour
         }
     }
    
+    public bool IsDrivingOverpass()
+    {
+        return isDrivingOnOverpass;
+    }
+
     private void OnTriggerEnter2D(Collider2D collider2d)
     {
         if (collider2d.CompareTag("UnderpassTrigger"))

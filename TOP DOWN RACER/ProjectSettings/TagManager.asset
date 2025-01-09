@@ -59,6 +59,9 @@ TagManager:
   - name: RaceTrackOverpass
     uniqueID: 3574081199
     locked: 0
+  - name: SkidMarksOverpass
+    uniqueID: 499881235
+    locked: 0
   - name: Flying
     uniqueID: 2072157333
     locked: 0
