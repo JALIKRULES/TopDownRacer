@@ -34,6 +34,8 @@ public class CarLayerHandler : MonoBehaviour
         }
 
         carCollider = GetComponentInChildren<Collider2D>();
+
+        carCollider.gameObject.layer = LayerMask.NameToLayer("ObjectOnUnderpass");
     }
 
     void Start()
@@ -93,11 +95,15 @@ public class CarLayerHandler : MonoBehaviour
         {
             isDrivingOnOverpass = false;
 
+            carCollider.gameObject.layer = LayerMask.NameToLayer("ObjectOnUnderpass");
+
             UpdateSortingAndCollisionLayers();
         }
         else if (collider2d.CompareTag("OverpassTrigger"))
         {
             isDrivingOnOverpass = true;
+
+            carCollider.gameObject.layer = LayerMask.NameToLayer("ObjectOnOverpass");
 
             UpdateSortingAndCollisionLayers();
         }
