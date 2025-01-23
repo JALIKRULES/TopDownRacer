@@ -161,6 +161,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6034026809975150997, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
       insertIndex: -1
       addedObject: {fileID: -8219232302849713990}
+    - targetCorrespondingSourceObject: {fileID: 6034026809975150997, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4665841388799289963}
   m_SourcePrefab: {fileID: 100100000, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
 --- !u!1 &5766844918315879176 stripped
 GameObject:
@@ -183,6 +186,21 @@ MonoBehaviour:
   maxSpeed: 16
   isAvoidingCars: 1
   skillLevel: 1
+--- !u!114 &4665841388799289963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766844918315879176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b006fd927c9704542a597f0e63403684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSizeX: 50
+  gridSizeY: 30
+  cellSize: 2
 --- !u!212 &7151323676233202957 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 6954757878528143248, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}

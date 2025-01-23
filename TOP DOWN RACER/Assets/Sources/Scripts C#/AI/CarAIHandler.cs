@@ -1,5 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CarAIHandler : MonoBehaviour
@@ -16,7 +17,12 @@ public class CarAIHandler : MonoBehaviour
     Vector3 targetPosition = Vector3.zero;
     Transform targetTransform = null;
     float originalMaximumSpeed = 0.0f;
-    
+
+    bool isRunningStuckCheck = false;
+    bool isFirstTemproaryWaypoint = false;
+    int stuckCheckCounter = 0;
+    List<Vector2> temproaryWaypoints = new List<Vector2>();
+    float angleToTarget = 0;
 
     Vector2 avoidanceVectorLerped = Vector2.zero;
 
@@ -24,16 +30,20 @@ public class CarAIHandler : MonoBehaviour
     WaypointNode previousWaypoint = null;
     WaypointNode[] allWaypoints;
 
-    PolygonCollider2D polygonCollider2D;
+    CapsuleCollider2D capsuleCollider2D;
 
     TopDownCarController topDownCarController;
+
+    AStarLite aStarLite;
 
     void Awake()
     {
         topDownCarController = GetComponent<TopDownCarController>();
         allWaypoints = FindObjectsOfType<WaypointNode>();
 
-        polygonCollider2D = GetComponentInChildren<PolygonCollider2D>();
+        aStarLite = GetComponent<AStarLite>();
+
+        capsuleCollider2D = GetComponentInChildren<CapsuleCollider2D>();
 
         originalMaximumSpeed = maxSpeed;
     }
@@ -49,11 +59,20 @@ public class CarAIHandler : MonoBehaviour
         switch (aiMode)
         {
             case AIMode.followPlayer: FollowPlayer(); break;
-            case AIMode.followWaypoints: FollowWaypoints(); break;
+            case AIMode.followWaypoints:
+                if (temproaryWaypoints.Count == 0)
+                    FollowWaypoints();
+                else FollowTemproaryWaypoints(); break;
         }
 
         inputVector.x = TurnTowardsTarget();
         inputVector.y = ApplyThrottleOrBrake(inputVector.x);
+
+        if (topDownCarController.GetVelocityMagnitude() < 0.5f && Mathf.Abs(inputVector.y) > 0.01f && !isRunningStuckCheck)
+            StartCoroutine(StuckCheckCO());
+
+        if (stuckCheckCounter >= 4 && !isRunningStuckCheck)
+            StartCoroutine(StuckCheckCO());
 
         topDownCarController.SetInputVector(inputVector);
     }
@@ -108,6 +127,26 @@ public class CarAIHandler : MonoBehaviour
 
     }
 
+    void FollowTemproaryWaypoints()
+    {
+        targetPosition = temproaryWaypoints[0];
+
+        float distanceToWaypoint = (targetPosition - transform.position).magnitude;
+
+        SetMaxSpeedBasedONSkillLevel(5);
+
+        float minDistanceToReachWaypoint = 1.5f;
+
+        if (!isFirstTemproaryWaypoint)
+            minDistanceToReachWaypoint = 3.0f;
+
+        if (distanceToWaypoint <= minDistanceToReachWaypoint)
+        {
+            temproaryWaypoints.RemoveAt(0);
+            isFirstTemproaryWaypoint = false;
+        }
+
+    }
     WaypointNode FindClosestWaypoint()
     {
         return allWaypoints
@@ -123,7 +162,7 @@ public class CarAIHandler : MonoBehaviour
         if (isAvoidingCars)
             AvoidCars(vectorToTarget, out vectorToTarget);
 
-        float angleToTarget = Vector2.SignedAngle(transform.up, vectorToTarget);
+        angleToTarget = Vector2.SignedAngle(transform.up, vectorToTarget);
         angleToTarget *= -1;
 
         float steerAmount = angleToTarget / 45.0f;
@@ -140,12 +179,24 @@ public class CarAIHandler : MonoBehaviour
 
         float reduceSpeedDueToCornering = Mathf.Abs(inputX) / 1.0f;
 
-        return 1.05f - reduceSpeedDueToCornering * skillLevel;
+        float throttle = 1.05f - reduceSpeedDueToCornering * skillLevel;
+
+        if (temproaryWaypoints.Count() != 0)
+        {
+            if (angleToTarget > 70)
+                throttle = throttle * -1;
+            else if (angleToTarget < -70)
+                throttle = throttle * -1;
+            else if(stuckCheckCounter > 3)
+                throttle = throttle * -1;
+        }
+
+        return throttle;
     }
 
     void SetMaxSpeedBasedONSkillLevel(float newSpeed)
     {
-        maxSpeed = Mathf.Clamp(newSpeed , 0 , originalMaximumSpeed);
+        maxSpeed = Mathf.Clamp(newSpeed, 0, originalMaximumSpeed);
 
         float skillBAseMaximumSpeed = Mathf.Clamp(skillLevel, 0.3f, 1.0f);
         maxSpeed = maxSpeed * skillBAseMaximumSpeed;
@@ -168,11 +219,11 @@ public class CarAIHandler : MonoBehaviour
 
     bool IsCarInFrontOfAICar(out Vector3 position, out Vector3 otherCarRightVector)
     {
-        polygonCollider2D.enabled = false;
+        capsuleCollider2D.enabled = false;
 
         RaycastHit2D raycastHit2D = Physics2D.CircleCast(transform.position + transform.up * 0.5f, 1.2f, transform.up, 12, 1 << LayerMask.NameToLayer("Car"));
 
-        polygonCollider2D.enabled = true;
+        capsuleCollider2D.enabled = true;
 
         if (raycastHit2D.collider != null)
         {
@@ -225,6 +276,30 @@ public class CarAIHandler : MonoBehaviour
 
         newVectorToTarget = vectorToTarget;
 
+    }
+
+    IEnumerator StuckCheckCO()
+    {
+        Vector3 initialPosition = transform.position;
+
+        isRunningStuckCheck = true;
+
+        yield return new WaitForSeconds(0.7f);
+
+        if ((transform.position - initialPosition).sqrMagnitude < 3)
+        {
+            temproaryWaypoints = aStarLite.FindPath(currentWaypoint.transform.position);
+
+            if (temproaryWaypoints == null)
+                temproaryWaypoints = new List<Vector2>();
+
+            stuckCheckCounter++;
+
+            isFirstTemproaryWaypoint = true;
+        }
+        else stuckCheckCounter = 0;
+
+        isRunningStuckCheck = false;
     }
 
 }

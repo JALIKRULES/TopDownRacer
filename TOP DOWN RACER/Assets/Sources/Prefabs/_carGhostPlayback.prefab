@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8591171640642453421}
   - component: {fileID: 7482220791533702531}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: _carGhostPlayback
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6437695142950196131}
   - component: {fileID: 3238994600234358219}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
