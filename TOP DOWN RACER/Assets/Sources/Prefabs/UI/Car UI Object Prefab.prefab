@@ -155,3 +155,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 808a260ea0080f546824a8eb6b639fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carImage: {fileID: 5817124022293785603}

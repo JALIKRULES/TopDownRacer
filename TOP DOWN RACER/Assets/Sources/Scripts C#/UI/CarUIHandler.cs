@@ -1,8 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarUIHandler : MonoBehaviour
 {
+    [Header("Car details")]
+    public Image carImage;
+
     Animator animator = null;
+
 
     private void Awake()
     {
@@ -12,6 +17,11 @@ public class CarUIHandler : MonoBehaviour
     void Start()
     {
 
+    }
+
+    public void SetUpCar(CarData carData)
+    {
+        carImage.sprite = carData.CarUISprite;
     }
 
     public void StartCarEnteranceAnimation(bool isAppearingOnRightSide)
@@ -29,7 +39,7 @@ public class CarUIHandler : MonoBehaviour
         else animator.Play("CarUIDisappearToLeft");
     }
 
-    //Eventa
+    //Events
     public void OnCarExitAnimationCompleated()
     {
         Destroy(gameObject);
