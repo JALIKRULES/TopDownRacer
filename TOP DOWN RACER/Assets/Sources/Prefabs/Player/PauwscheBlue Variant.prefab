@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauwscheBlue Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6954757878528143248, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1698211227, guid: efefdbcd1e4cf614ab3515a2e295176a, type: 3}
+    - target: {fileID: 8011032269985758033, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1698211227, guid: efefdbcd1e4cf614ab3515a2e295176a, type: 3}
     - target: {fileID: 8934781323912724793, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
       propertyPath: m_Sprite
       value: 
