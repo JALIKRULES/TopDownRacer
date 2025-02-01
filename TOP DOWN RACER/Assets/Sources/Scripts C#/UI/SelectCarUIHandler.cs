@@ -71,9 +71,16 @@ public class SelectCarUIHandler : MonoBehaviour
     public void OnSelectCar()
     {
         PlayerPrefs.SetInt("P1SelectedCarID", carDatas[selectedCarIndex].CarUniqueID);
-        PlayerPrefs.SetInt("P2SelectedCarID", carDatas[selectedCarIndex].CarUniqueID);
-        PlayerPrefs.SetInt("P3SelectedCarID", carDatas[selectedCarIndex].CarUniqueID);
-        PlayerPrefs.SetInt("P4SelectedCarID", carDatas[selectedCarIndex].CarUniqueID);
+        PlayerPrefs.SetInt("P1_isAI", 0);
+
+        PlayerPrefs.SetInt("P2SelectedCarID", carDatas[Random.Range(0,carDatas.Length)].CarUniqueID);
+        PlayerPrefs.SetInt("P2_isAI", 1);
+        
+        PlayerPrefs.SetInt("P3SelectedCarID", carDatas[Random.Range(0, carDatas.Length)].CarUniqueID);
+        PlayerPrefs.SetInt("P3_isAI", 1);
+
+        PlayerPrefs.SetInt("P4SelectedCarID", carDatas[Random.Range(0, carDatas.Length)].CarUniqueID);
+        PlayerPrefs.SetInt("P4_isAI", 1);
 
         PlayerPrefs.Save();
 

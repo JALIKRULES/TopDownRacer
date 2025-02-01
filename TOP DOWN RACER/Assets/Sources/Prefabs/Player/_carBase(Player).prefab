@@ -6212,6 +6212,8 @@ GameObject:
   - component: {fileID: -2231842231631546650}
   - component: {fileID: 5913165406620910022}
   - component: {fileID: 1374750271173408384}
+  - component: {fileID: -8941891842474136792}
+  - component: {fileID: -6452380587876521940}
   m_Layer: 8
   m_Name: _carBase(Player)
   m_TagString: Player
@@ -6402,6 +6404,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carSpriteObject: {fileID: 2454342690643801811}
   ghostCarPlaybackPrefab: {fileID: 4917640024219237089, guid: d9e38c0626df5f647831d3b92763f213, type: 3}
+--- !u!114 &-8941891842474136792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6034026809975150997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b006fd927c9704542a597f0e63403684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSizeX: 50
+  gridSizeY: 30
+  cellSize: 2
+  isDebugActiveForACar: 0
+--- !u!114 &-6452380587876521940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6034026809975150997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7653a9ad75944dd4d8f731f972dca4bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiMode: 1
+  maxSpeed: 16
+  isAvoidingCars: 1
+  skillLevel: 1
 --- !u!1 &6039522628838557074
 GameObject:
   m_ObjectHideFlags: 0

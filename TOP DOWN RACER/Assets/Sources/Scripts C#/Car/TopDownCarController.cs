@@ -39,6 +39,9 @@ public class TopDownCarController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(GameManager.Instance.GetGameState() == GameStates.countDown)
+            return;
+
         ApplyEngineForce();
 
         KillOrthogonalVelocity();

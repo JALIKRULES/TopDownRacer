@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4168074694610068694, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
+      propertyPath: isUIInput
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6034026809975150997, guid: 4df16c1a99996c94fa9ad5bd4a717e1a, type: 3}
       propertyPath: m_Name
       value: PauwscheBlack Variant

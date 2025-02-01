@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class SpawnCars : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
+
     void Start()
     {
         GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
@@ -19,9 +20,23 @@ public class SpawnCars : MonoBehaviour
             {
                 if (carData.CarUniqueID == playerSelectedCarID)
                 {
-                    GameObject playerCar = Instantiate(carData.CarPrefab, spawnPoint.position, spawnPoint.rotation);
+                    GameObject car = Instantiate(carData.CarPrefab, spawnPoint.position, spawnPoint.rotation);
 
-                    playerCar.GetComponent<CarInputHandler>().playerNumber = i + 1;
+                    int playerNumber = i + 1;
+
+                    car.GetComponent<CarInputHandler>().playerNumber = i + 1;
+
+                    if(PlayerPrefs.GetInt($"P{playerNumber}_isAI") == 1)
+                    {
+                        car.GetComponent<CarInputHandler>().enabled = false;
+                        car.tag = "AI";
+                    }
+                    else
+                    {
+                        car.GetComponent<CarAIHandler>().enabled = false;
+                        car.GetComponent<AStarLite>().enabled = false;
+                        car.tag = "Player";
+                    }
 
                     break;
                 }
