@@ -31,7 +31,7 @@ public class LeaderBoardUIHandler : MonoBehaviour
     {
         for (int i = 0; i < lapCounters.Count; i++)
         {
-            setLeaderBoardItemInfo[i].SetDriverName(lapCounters[i].gameObject.name);
+            //setLeaderBoardItemInfo[i].SetDriverName(lapCounters[i].gameObject.name);
         }
     }
 }

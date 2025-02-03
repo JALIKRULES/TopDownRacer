@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 public class SpawnCars : MonoBehaviour
@@ -6,6 +7,8 @@ public class SpawnCars : MonoBehaviour
 
     void Start()
     {
+        
+
         GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
 
         CarData[] carDatas = Resources.LoadAll<CarData>("CarData/");
@@ -29,13 +32,17 @@ public class SpawnCars : MonoBehaviour
                     if(PlayerPrefs.GetInt($"P{playerNumber}_isAI") == 1)
                     {
                         car.GetComponent<CarInputHandler>().enabled = false;
+                        car.GetComponentInChildren<CinemachineVirtualCamera>().enabled = false;
                         car.tag = "AI";
+
                     }
                     else
                     {
                         car.GetComponent<CarAIHandler>().enabled = false;
                         car.GetComponent<AStarLite>().enabled = false;
                         car.tag = "Player";
+
+                        
                     }
 
                     break;

@@ -55,6 +55,9 @@ public class CarAIHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.GetGameState() == GameStates.countDown)
+            return;
+
         Vector2 inputVector = Vector2.zero;
         switch (aiMode)
         {

@@ -457,7 +457,6 @@ GameObject:
   - component: {fileID: 734865613491405410}
   - component: {fileID: 5358261512491588913}
   - component: {fileID: 5600396193530924141}
-  - component: {fileID: 2501826578685110715}
   m_Layer: 5
   m_Name: Canvas-In Game
   m_TagString: Untagged
@@ -474,7 +473,7 @@ RectTransform:
   m_GameObject: {fileID: 6286579588411566052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.36197916, y: 0.36197916, z: 0.36197916}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3357489168752163846}
@@ -486,7 +485,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1689567270481807478
 Canvas:
   m_ObjectHideFlags: 0
@@ -562,19 +561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f183e397be770e149a0582b78fa047d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2501826578685110715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6286579588411566052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f020d89571c07014fa2255a11df5bfb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carLapCounters: []
 --- !u!1 &6690963097504219395
 GameObject:
   m_ObjectHideFlags: 0

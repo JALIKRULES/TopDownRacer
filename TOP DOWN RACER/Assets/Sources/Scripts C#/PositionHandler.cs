@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,7 +10,7 @@ public class PositionHandler : MonoBehaviour
 
     public List<CarLapCounter> carLapCounters = new List<CarLapCounter>();
 
-    private void Awake()
+    private void Start()
     {
         CarLapCounter[] carLapCountersArray = FindObjectsOfType<CarLapCounter>();
 
@@ -21,11 +20,9 @@ public class PositionHandler : MonoBehaviour
             carLapCounter.OnPassCheckPoint += OnPassCheckPoint;
 
         leaderboardUIHandler = FindObjectOfType<LeaderBoardUIHandler>();
-    }
 
-    private void Start()
-    {
-        leaderboardUIHandler.UpdateList(carLapCounters);
+        if (leaderboardUIHandler != null)
+            leaderboardUIHandler.UpdateList(carLapCounters);
     }
 
     void OnPassCheckPoint(CarLapCounter carLapCounter)
@@ -36,6 +33,7 @@ public class PositionHandler : MonoBehaviour
 
         carLapCounter.SetCarPosition(carPosition);
 
-        leaderboardUIHandler.UpdateList(carLapCounters);
+        if (leaderboardUIHandler != null)
+            leaderboardUIHandler.UpdateList(carLapCounters);
     }
 }
