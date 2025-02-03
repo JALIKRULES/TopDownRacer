@@ -19,17 +19,33 @@ public class GhostCarRecorder : MonoBehaviour
     {
         carRigidBody2D = GetComponent<Rigidbody2D>();
         carInputHandler = GetComponent<CarInputHandler>();
+
+        GameManager.Instance.OnGameStateChanged += GameManager_OnGameStateChanged;
+    }
+
+    private void GameManager_OnGameStateChanged(GameManager obj)
+    {
+        if (GameManager.Instance.GetGameState() == GameStates.running)
+            StartCoroutine(RecordCarPositionCO());
+
+        if (GameManager.Instance.GetGameState() == GameStates.raceOver)
+            StartCoroutine(SaveCarPositonCO());
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        if (!CompareTag("Player"))
+        {
+            Destroy(this);
+            return;
+        }
+
         GameObject ghostCar = Instantiate(ghostCarPlaybackPrefab);
 
         ghostCar.GetComponent<GhostCarPlayback>().LoadData(carInputHandler.playerNumber);
 
-        StartCoroutine(RecordCarPositionCO());
-        StartCoroutine(SaveCarPositonCO());
+       
     }
 
     IEnumerator RecordCarPositionCO()
@@ -45,7 +61,7 @@ public class GhostCarRecorder : MonoBehaviour
 
     IEnumerator SaveCarPositonCO()
     {
-        yield return new WaitForSeconds(5); 
+        yield return new WaitForSeconds(1); 
 
         SaveData();
     }
@@ -63,5 +79,10 @@ public class GhostCarRecorder : MonoBehaviour
         }
 
         isRecording = false;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGameStateChanged -= GameManager_OnGameStateChanged;
     }
 }

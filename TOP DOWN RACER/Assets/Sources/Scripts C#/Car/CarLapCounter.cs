@@ -87,8 +87,23 @@ public class CarLapCounter : MonoBehaviour
                 OnPassCheckPoint?.Invoke(this);
 
                 if (isRaceCompleted)
+                {
                     StartCoroutine(ShowPositionCO(100));
-                else StartCoroutine(ShowPositionCO(1.5f));
+
+                    if (CompareTag("Player"))
+                    {
+                        GameManager.Instance.OnRaceCompleated();
+
+                        GetComponent<CarInputHandler>().enabled = false;
+                        GetComponent<CarAIHandler>().enabled = true;
+                        GetComponent<AStarLite>().enabled = true;
+                    }
+                }
+                else if (checkPoint.isFinishLine)
+                {
+                    StartCoroutine(ShowPositionCO(1.5f));
+                }
+
             }
         }
     }
