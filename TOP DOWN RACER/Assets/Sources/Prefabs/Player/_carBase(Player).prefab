@@ -6416,8 +6416,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b006fd927c9704542a597f0e63403684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSizeX: 50
-  gridSizeY: 30
+  gridSizeX: 300
+  gridSizeY: 300
   cellSize: 2
   isDebugActiveForACar: 0
 --- !u!114 &-6452380587876521940

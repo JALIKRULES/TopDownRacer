@@ -7,49 +7,59 @@ public class CarInputHandler : MonoBehaviour
 
     Vector2 inputVector = Vector2.zero;
 
-
     TopDownCarController topDownCarController;
+
+    private PlayerInputActions playerInputActions;
 
     private void Awake()
     {
         topDownCarController = GetComponent<TopDownCarController>();
+
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Enable();
     }
 
     private void Update()
     {
+        GetMovementVectorNormalized();
+    }
+
+    public Vector2 GetMovementVectorNormalized()
+    {
+
         if (isUIInput)
         {
 
         }
         else
         {
-            inputVector = Vector2.zero;
-
             switch (playerNumber)
             {
                 case 1:
-                    inputVector.x = Input.GetAxis("Horizontal_P1");
-                    inputVector.y = Input.GetAxis("Vertical_P1");
+                    inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
                     break;
                 case 2:
-                    inputVector.x = Input.GetAxis("Horizontal_P2");
-                    inputVector.y = Input.GetAxis("Vertical_P2");
+                    inputVector = playerInputActions.Player.Move2.ReadValue<Vector2>();
                     break;
                 case 3:
-                    inputVector.x = Input.GetAxis("Horizontal_P3");
-                    inputVector.y = Input.GetAxis("Vertical_P3");
+                    inputVector = playerInputActions.Player.Move3.ReadValue<Vector2>();
                     break;
                 case 4:
-                    inputVector.x = Input.GetAxis("Horizontal_P4");
-                    inputVector.y = Input.GetAxis("Vertical_P4");
+                    inputVector = playerInputActions.Player.Move4.ReadValue<Vector2>();
                     break;
             }
+            
+
+
+
+
         }
         topDownCarController.SetInputVector(inputVector);
 
+        inputVector = inputVector.normalized;
+
+        return inputVector;
     }
-
-
 
     public void SetInput(Vector2 newInput)
     {
