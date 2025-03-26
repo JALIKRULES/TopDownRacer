@@ -33,6 +33,16 @@ public class PositionHandler : MonoBehaviour
 
         carLapCounter.SetCarPosition(carPosition);
 
+        if (carLapCounter.IsRaceCompleated())
+        {
+            int playerNumber = carLapCounter.GetComponent<CarInputHandler>().playerNumber;
+            GameManager.Instance.SetDriversLastRacePosition(playerNumber,carPosition);
+
+            int ChampionshipPointsAwarded = FindObjectOfType<SpawnCars>().GetNumberOfCarsSpawned() - carPosition;
+            GameManager.Instance.AddPointsToChampionship(playerNumber, ChampionshipPointsAwarded);
+
+        }
+
         if (leaderboardUIHandler != null)
             leaderboardUIHandler.UpdateList(carLapCounters);
     }

@@ -1,35 +1,47 @@
 using Cinemachine;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using UnityEngine;
-
 public class SpawnCars : MonoBehaviour
 {
-    
+    int numberOfCarsSpawned = 0;
 
     void Start()
     {
-        
-
         GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
 
+        spawnPoints = spawnPoints.ToList().OrderBy(s => s.name).ToArray();
+
         CarData[] carDatas = Resources.LoadAll<CarData>("CarData/");
+
+        List<DriverInfo> driverInfoList = new List<DriverInfo>(GameManager.Instance.GetDriverList());
+
+        driverInfoList = driverInfoList.OrderBy(s => s.lastRacePosition).ToList();
+
 
         for (int i = 0; i < spawnPoints.Length; i++)
         {
             Transform spawnPoint = spawnPoints[i].transform;
 
-            int playerSelectedCarID = PlayerPrefs.GetInt($"P{i + 1}SelectedCarID");
+            if (driverInfoList.Count == 0) return;
+
+            DriverInfo driverInfo = driverInfoList[0];
+
+            int selectedCarID = driverInfo.carUniqueID;
 
             foreach (CarData carData in carDatas)
             {
-                if (carData.CarUniqueID == playerSelectedCarID)
+                if (carData.CarUniqueID == selectedCarID)
                 {
                     GameObject car = Instantiate(carData.CarPrefab, spawnPoint.position, spawnPoint.rotation);
 
-                    int playerNumber = i + 1;
+                    car.name = driverInfo.playerName;
 
-                    car.GetComponent<CarInputHandler>().playerNumber = i + 1;
+                    car.GetComponent<CarInputHandler>().playerNumber = driverInfo.playerNumber;
 
-                    if(PlayerPrefs.GetInt($"P{playerNumber}_isAI") == 1)
+
+                    if (driverInfo.isAI)
                     {
                         car.GetComponent<CarInputHandler>().enabled = false;
                         car.GetComponentInChildren<CinemachineVirtualCamera>().enabled = false;
@@ -42,14 +54,23 @@ public class SpawnCars : MonoBehaviour
                         car.GetComponent<AStarLite>().enabled = false;
                         car.tag = "Player";
 
-                        
+
                     }
+
+                    numberOfCarsSpawned++;
 
                     break;
                 }
             }
+
+            driverInfoList.Remove(driverInfo);
         }
     }
 
+    public int GetNumberOfCarsSpawned() 
+    {
+        return numberOfCarsSpawned;
+    }
+        
 
 }

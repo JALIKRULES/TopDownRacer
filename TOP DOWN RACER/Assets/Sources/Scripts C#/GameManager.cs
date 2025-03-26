@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     float raceStartedTime = 0;
     float raceCompletedTime = 0;
+
+    List<DriverInfo> driverInfoList = new List<DriverInfo>();
 
     public event Action<GameManager> OnGameStateChanged;
 
@@ -29,7 +32,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-
+        driverInfoList.Add(new DriverInfo(1, "P1", 0, false));
     }
 
 
@@ -64,6 +67,45 @@ public class GameManager : MonoBehaviour
         else if (gameState == GameStates.raceOver)
             return raceCompletedTime - raceStartedTime;
         else return Time.time - raceStartedTime;
+    }
+
+    public void ClearDriversList()
+    {
+        driverInfoList.Clear();
+    }
+
+    public void AddDriverToList(int playerName, string name, int carUniqueID, bool isAI)
+    {
+        driverInfoList.Add(new DriverInfo(playerName, name, carUniqueID, isAI));
+    }
+
+    public void SetDriversLastRacePosition(int playerNumber, int position)
+    {
+        DriverInfo driverInfo = FindDriverInfo(playerNumber);
+        driverInfo.lastRacePosition = position;
+    }
+
+    public void AddPointsToChampionship(int playerNumber, int points)
+    {
+        DriverInfo driverInfo = FindDriverInfo(playerNumber);
+        driverInfo.championshipPoints += points;
+    }
+
+    DriverInfo FindDriverInfo(int playerNumber)
+    {
+        foreach (DriverInfo driverInfo in driverInfoList)
+        {
+            if (playerNumber == driverInfo.playerNumber)
+                return driverInfo;
+        }
+
+        Debug.LogError($"FindDriverInfoBasedOnDriverNumber failed for player number: {playerNumber}");
+        return null;
+    }
+
+    public List<DriverInfo> GetDriverList()
+    {
+        return driverInfoList;
     }
 
     public void OnRaceStart()
